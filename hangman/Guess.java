@@ -15,6 +15,7 @@ public class Guess extends javax.swing.JFrame {
     String uni = "";
     String cpy = Input.word.toUpperCase(); //Input.word;
     String hng = "H A N G M A N";
+    String blank="_ _ _ _ _ _ _";
     String try1 = " ";
     int tflag = 0;
     int win = 0;
@@ -41,7 +42,7 @@ public class Guess extends javax.swing.JFrame {
             txt_out.setText(uni1);
             t = 1;
         } while (t == 0);
-        txt_hang.setText("_ _ _ _ _ _ _ ");
+        txt_hang.setText(blank);
     }
 
     @SuppressWarnings("unchecked")
@@ -133,7 +134,6 @@ public class Guess extends javax.swing.JFrame {
         boolean check = false;
         txt_err.setText("");
         chk = txt_enter.getText().toUpperCase();
-        System.out.println(chk);
         if (((int) chk.charAt(0) >= 65 && (int) chk.charAt(0) <= 90) || ((int) chk.charAt(0) >= 48 && (int) chk.charAt(0) <= 57)) {//txt_out.setText(cpy);
             boolean flag = true;
             boolean flag2 = false;
@@ -153,7 +153,6 @@ public class Guess extends javax.swing.JFrame {
                     for (int c = 0; c < uni.length(); c++) {
                         uni1 = uni1 + uni.charAt(c) + " ";
                     }
-                    System.out.println(hngf + "Counter");
                     txt_out.setText(uni1);
                     if (winflag) {
                         win++;
@@ -166,46 +165,24 @@ public class Guess extends javax.swing.JFrame {
 
                         for (int l = 0; l < win; l++) {
                             for (int m = 0; m < win; m++) {
-                                System.out.println("in-" + winstr.charAt(l) + "  " + cpy.charAt(m) + " " + win1);
                                 if (winstr.charAt(l) == cpy.charAt(m)) {
                                     check = true;
                                     win1++;
                                 }
-                                System.out.println("chk" + check);
                             }
                         }
                     }
-
                 }
-
             }
-            System.out.println("HNGF-" + hngf);
             hngff = hngff + hngf * hngf;
-            System.out.println("HNGF " + hngf + " " + hngff);
             hngf = 0;
             if (win1 == hngff && check == true) {
                 txt_err.setForeground(Color.green);
                 txt_err.setText("You Won !");
             }
-            /* for (int y = 0; y < cpy.length() - 1; y++) {
-                for (int z = y + 1; z < cpy.length(); z++) {
-                    if (cpy.charAt(y) == cpy.charAt(z)) {
-                        counter++;
-                    }
-                }
-                cal = cal + counter;
-                //counter=0;
-            }*/
-            System.out.println(counter);
-            /* if (check) {
-                txt_err.setForeground(Color.green);
-                txt_err.setText("You Won !");
-            }*/
-
             if (flag) {
                 if (!flag2) {
-
-                    txt_hang.setText(hng.substring(0, d));
+                    txt_hang.setText(hng.substring(0, d)+" "+blank.substring(d+1,13));
                     d = d + 2;
                 }
                 try1 = try1.trim() + chk + ",";
@@ -214,7 +191,6 @@ public class Guess extends javax.swing.JFrame {
                     txt_err.setText("Game Over");
                 }
             }
-            System.out.println(try1);
         }
         txt_enter.setText("");
         txt_try.setText("Wrong words you have already entered-" + try1);
